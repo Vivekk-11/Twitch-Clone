@@ -2,6 +2,8 @@ import { getSelfByUsername } from "@/lib/auth-service";
 import { redirect } from "next/navigation";
 import React from "react";
 import { Navbar } from "./_components/navbar";
+import { Sidebar } from "./_components/sidebar";
+import { Container } from "./_components/container";
 
 interface Props {
   params: {
@@ -18,7 +20,10 @@ const CreatorLayout = async ({ params, children }: Props) => {
   return (
     <>
       <Navbar />
-      <div className="flex h-full pt-20">{children}</div>;
+      <div className="flex h-full pt-20">
+        <Sidebar />
+        <Container>{children}</Container>
+      </div>
     </>
   );
 };
