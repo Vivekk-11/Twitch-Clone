@@ -3,6 +3,7 @@ import { getUserByUsername } from "@/lib/user-service";
 import { notFound } from "next/navigation";
 import React from "react";
 import { Actions } from "./_components/actions";
+import { isBlockedByUser } from "@/lib/block-service";
 
 interface Props {
   params: {
