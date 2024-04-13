@@ -1,7 +1,7 @@
 "use client";
 
 import { ConnectionState } from "livekit-client";
-import { useChatSidebar } from "@/store/use-chat-sidebar";
+import { ChatVariant, useChatSidebar } from "@/store/use-chat-sidebar";
 import {
   useChat,
   useConnectionState,
@@ -62,6 +62,16 @@ export const Chat = ({
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
       <ChatHeader />
+      {variant === ChatVariant.CHAT && (
+        <>
+          <p>Chat mode</p>
+        </>
+      )}
+      {variant === ChatVariant.COMMUNITY && (
+        <>
+          <p>Community</p>
+        </>
+      )}
     </div>
   );
 };
