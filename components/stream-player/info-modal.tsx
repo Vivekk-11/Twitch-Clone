@@ -51,6 +51,17 @@ export const InfoModal = ({ initialName, initialThumbnail }: Props) => {
     setName(event.target.value);
   };
 
+  const onRemoveThumbnail = () => {
+    startTransition(() => {
+      updateStream({ thumbnailUrl: null })
+        .then(() => {
+          setThumbnailUrl(null);
+          toast.success("Thumbnail removed successfully!");
+        })
+        .catch(() => toast.error("Something went wrong!"));
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -81,7 +92,7 @@ export const InfoModal = ({ initialName, initialThumbnail }: Props) => {
                     <Button
                       className="h-auto w-auto p-1.5"
                       type="button"
-                      onClick={() => {}}
+                      onClick={onRemoveThumbnail}
                       disabled={isPending}
                     >
                       <Trash className="h-4 w-4" />
@@ -110,6 +121,7 @@ export const InfoModal = ({ initialName, initialThumbnail }: Props) => {
                   onClientUploadComplete={(res) => {
                     setThumbnailUrl(res?.[0]?.url);
                     router.refresh();
+                    closeRef.current?.click();
                   }}
                   onUploadError={(error) => {
                     console.log("Uploadthing error:-", error);
