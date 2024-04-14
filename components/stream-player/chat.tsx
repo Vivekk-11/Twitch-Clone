@@ -12,6 +12,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ChatHeader } from "./chat-header";
 import { ChatForm } from "./chat-form";
 import { ChatList } from "./chat-list";
+import { ChatCommunity } from "./chat-community";
 
 interface Props {
   hostName: string;
@@ -80,7 +81,11 @@ export const Chat = ({
       )}
       {variant === ChatVariant.COMMUNITY && (
         <>
-          <p>Community</p>
+          <ChatCommunity
+            isHidden={isHidden}
+            viewerName={viewerName}
+            hostName={hostName}
+          />
         </>
       )}
     </div>
