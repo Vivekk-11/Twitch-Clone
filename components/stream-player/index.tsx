@@ -11,6 +11,7 @@ import { isFollowingUser } from "@/lib/follow-service";
 import { useEffect, useState } from "react";
 import { ChatToggle } from "./chat-toggle";
 import { Header, HeaderSkeleton } from "./header";
+import { InfoCard } from "./info-card";
 
 interface Props {
   user: User & { stream: Stream | null };
@@ -50,6 +51,12 @@ export const StreamPlayer = ({ user, stream, isFollowing }: Props) => {
             isFollowing={isFollowing}
             viewerIdentity={identity}
             imageUrl={user.imageUrl}
+          />
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            thumbnailUrl={stream.thumbnailUrl}
+            name={stream.name}
           />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
