@@ -10,6 +10,7 @@ import { Chat, ChatSkeleton } from "./chat";
 import { isFollowingUser } from "@/lib/follow-service";
 import { useEffect, useState } from "react";
 import { ChatToggle } from "./chat-toggle";
+import { Header } from "./header";
 
 interface Props {
   user: User & { stream: Stream | null };
@@ -42,6 +43,14 @@ export const StreamPlayer = ({ user, stream, isFollowing }: Props) => {
       >
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
           <Video hostIdentity={user.id} hostName={user.username} />
+          <Header
+            hostIdentity={user.id}
+            hostName={user.username}
+            name={stream.name}
+            isFollowing={isFollowing}
+            viewerIdentity={identity}
+            imageUrl={user.imageUrl}
+          />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
