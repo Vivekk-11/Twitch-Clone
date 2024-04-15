@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { Actions } from "./_components/actions";
 import { isBlockedByUser } from "@/lib/block-service";
+import { StreamPlayer } from "@/components/stream-player";
 
 interface Props {
   params: {
@@ -14,16 +15,15 @@ interface Props {
 const UsernamePage = async ({ params }: Props) => {
   const user = await getUserByUsername(params.username);
 
-  if (!user) notFound();
+  if (!user || !user.stream) notFound();
 
   const isFollowing = await isFollowingUser(user.id);
+  const isBlocked = await isBlockedByUser(user.id);
+
+  if (isBlocked) notFound();
 
   return (
-    <div className="flex flex-col gap-y-4">
-      User: {user.username}
-      isFollowing: {`${isFollowing}`}
-      <Actions userId={user.id} isFollowing={isFollowing} />
-    </div>
+    <StreamPlayer isFollowing={isFollowing} user={user} stream={user.stream} />
   );
 };
 
