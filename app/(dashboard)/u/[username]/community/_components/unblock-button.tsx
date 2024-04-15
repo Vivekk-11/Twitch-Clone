@@ -15,9 +15,11 @@ export const UnblockButton = ({ userId }: Props) => {
   const onClick = () => {
     startTransition(() => {
       onUnblock(userId)
-        .then((data) =>
-          toast.success(`User ${data.blocked.username} unblocked!`)
-        )
+        .then((data) => {
+          if (data) {
+            toast.success(`User ${data.blocked.username} unblocked!`);
+          }
+        })
         .catch(() => toast.error("Something went wrong!"));
     });
   };

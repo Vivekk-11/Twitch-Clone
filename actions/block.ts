@@ -30,7 +30,9 @@ export const onBlock = async (id: string) => {
   revalidatePath("/");
   revalidatePath(`/u/${self.username}/community`);
 
-  return blockedUser;
+  if (blockedUser) {
+    return blockedUser;
+  }
 };
 
 export const onUnblock = async (id: string) => {
@@ -39,5 +41,7 @@ export const onUnblock = async (id: string) => {
 
   revalidatePath(`/u/${self.username}/community`);
 
-  return unblockedUser;
+  if (unblockedUser) {
+    return unblockedUser;
+  }
 };
