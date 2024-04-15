@@ -1,4 +1,3 @@
-import { LiveBadge } from "@/components/live-badge";
 import { Thumbnail, ThumbnailSkeleton } from "@/components/thumbnail";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar, UserAvatarSkeleton } from "@/components/user-avatar";
@@ -25,11 +24,7 @@ export const ResultCard = ({ data }: Props) => {
           src={data.thumbnailUrl}
           fallback={data.user.imageUrl}
         />
-        {data.isLive && (
-          <div className="absolute top-2 left-2 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform">
-            <LiveBadge />
-          </div>
-        )}
+
         <div className="flex gap-x-3">
           <UserAvatar
             username={data.user.username}

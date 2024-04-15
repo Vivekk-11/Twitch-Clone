@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { UserAvatar } from "./user-avatar";
 import { Skeleton } from "./ui/skeleton";
+import { LiveBadge } from "./live-badge";
 
 interface Props {
   isLive: boolean;
@@ -14,7 +15,7 @@ export const Thumbnail = ({ isLive, src, fallback, username }: Props) => {
 
   if (!src) {
     content = (
-      <div className="flex flex-col items-center justify-center bg-background gap-y-4 h-full w-full transition-transform group-hover:translate-x-2 group-hover:translate-y-1 rounded-md">
+      <div className="flex flex-col items-center justify-center bg-background gap-y-4 h-full w-full transition-transform group-hover:translate-x-2 group-hover:translate-y-2 rounded-md">
         <UserAvatar
           size="lg"
           imageUrl={fallback}
@@ -39,6 +40,11 @@ export const Thumbnail = ({ isLive, src, fallback, username }: Props) => {
     <div className="group aspect-video relative rounded-md cursor-pointer">
       <div className="rounded-md absolute inset-0 bg-blue-600 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center" />
       {content}
+      {isLive && (
+        <div className="absolute top-2 left-2 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform">
+          <LiveBadge />
+        </div>
+      )}
     </div>
   );
 };
